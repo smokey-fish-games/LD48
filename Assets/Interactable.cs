@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
@@ -6,7 +8,13 @@ public class Interactable : MonoBehaviour
     [SerializeField] private GameStateMachine.StateOptions stateToPushTheState;
     [SerializeField] private string defaultResponse = "REPLACE ME DOOFUS";
 
+    private Animator animatorionar;
+
     [SerializeField] private Node closestNode;
+
+    [SerializeField] private UnityEvent preInteractionFunctions;
+    [SerializeField] private UnityEvent postInteractionFunctions;
+
 
     private GameStateMachine.StateOptions currentState;
 
@@ -22,6 +30,7 @@ public class Interactable : MonoBehaviour
     {
         GameStateMachine.current.onStatePushed += onStateUp;
         currentState = GameStateMachine.current.GetState();
+        animatorionar = GetComponent<Animator>();
     }
 
     public Node getClosestNode()
@@ -36,9 +45,11 @@ public class Interactable : MonoBehaviour
 
         if (hasAction && currentState == stateToPushTheState)
         {
+            preInteractionFunctions.Invoke();
             Debug.Log("DOING SOMETHING");
             // Do something special
             // Push state forwards
+            StartAnimation();
             GameStateMachine.current.PushState();
         }
         else
@@ -84,5 +95,32 @@ public class Interactable : MonoBehaviour
         // Draws a blue line from this transform to the target
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, closestNode.transform.position);
+    }
+
+    public void EndOfInteraction()
+    {
+        postInteractionFunctions.Invoke();
+    }
+
+    public void DestoryMeDaddy()
+    {
+        Debug.LogWarning("GOODBYE " + this.name);
+        transform.gameObject.SetActive(false);
+        //GameObject.Destroy(this);
+    }
+
+    public void HelloThere()
+    {
+        Debug.LogWarning("HELLO " + this.name);
+        transform.gameObject.SetActive(true);
+        //GameObject.Destroy(this);
+    }
+
+    public void StartAnimation()
+    {
+        if (animatorionar != null)
+        {
+            animatorionar.SetBool("Go", true);
+        }
     }
 }

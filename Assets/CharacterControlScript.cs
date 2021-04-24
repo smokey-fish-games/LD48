@@ -6,7 +6,7 @@ public class CharacterControlScript : MonoBehaviour
 {
     [SerializeField] private float rangeToNode = 0.1f;
     [SerializeField] private Node currentNode;
-    [SerializeField] private float speed = 0.15f;
+    [SerializeField] private float speed = 2f;
 
     public static CharacterControlScript current;
 
@@ -48,14 +48,64 @@ public class CharacterControlScript : MonoBehaviour
 
         // Walk to the route
         walkingRoute = Node.findPath(currentNode, targetInteractable.getClosestNode());
+        StartCoroutine("StartCreeping");
+    }
 
-        // LOGIC
-        this.transform.position = targetInteractable.getClosestNode().transform.position;
+    IEnumerator StartCreeping()
+    {
+        for (int i = 0; i < walkingRoute.Count; i++)
+        {
+            Node targetNode = walkingRoute[i];
+            Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 myTarget = new Vector2(targetNode.transform.position.x, targetNode.transform.position.y);
 
-        // call the interact
+            while (Vector2.Distance(myPos, myTarget) > rangeToNode)
+            {
+                float oldX = myPos.x;
+                // creep up on it
+                float step = speed * Time.deltaTime;
+
+                // move sprite towards the target location
+                transform.position = Vector2.MoveTowards(myPos, myTarget, step);
+                float newX = transform.position.x;
+
+                if (newX > oldX)
+                {
+                    faceRight();
+                }
+                else
+                {
+                    faceLeft();
+                }
+
+                myPos = new Vector2(transform.position.x, transform.position.y);
+                yield return null;
+            }
+        }
+
+        // make them face the object
+        if (transform.position.x > targetInteractable.transform.position.x)
+        {
+            faceLeft();
+        }
+        else
+        {
+            faceRight();
+        }
+
+        // call the interact now we're there
         targetInteractable.DoInteract();
         currentNode = targetInteractable.getClosestNode();
         isDoingSomething = false;
     }
 
+    public void faceRight()
+    {
+        this.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public void faceLeft()
+    {
+        this.transform.localScale = new Vector3(-1, 1, 1);
+    }
 }

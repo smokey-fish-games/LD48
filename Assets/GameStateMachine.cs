@@ -10,7 +10,6 @@ public class GameStateMachine : MonoBehaviour
         BROOM_COLLECTED, // Interact with broom
         VASE_SWEEPED, // Interact with broken pieces
         EXIT_1_ATTEMPT, // Interact with the exit (painting falls, fire starts)
-        FIRE_ALARM_ON, // Interact with the firealarm
         FIRE_EXTINGUISHER_PICKUP, // Interact with the FE
         FIRE_OUT, // Interact with the fire
         TAPESTRY_COVERUP, // Interacting with the tapestry
@@ -37,7 +36,6 @@ public class GameStateMachine : MonoBehaviour
     }
 
     public event Action<StateOptions> onStatePushed;
-
 
     public StateOptions GetState()
     {
