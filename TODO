@@ -1,9 +1,13 @@
 # Art
 all of it. needs improvement
 
+# Sounds + Music
+
 
 # logic
-* Player to walk to objects, THEN interact
 * When object interacts stuff acutally needs to happen
-* Exit area to be added
 * Seperate fire alarm and extinguisher
+* Dialog boxes for speech not console
+
+Player
+ * walk the nodes to get there

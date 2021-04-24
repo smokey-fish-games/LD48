@@ -6,9 +6,13 @@ public class Interactable : MonoBehaviour
     [SerializeField] private GameStateMachine.StateOptions stateToPushTheState;
     [SerializeField] private string defaultResponse = "REPLACE ME DOOFUS";
 
+    [SerializeField] private Node closestNode;
+
     private GameStateMachine.StateOptions currentState;
 
     bool isInteractable = true;
+    [SerializeField]
+    private bool hasAction = false;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -16,9 +20,13 @@ public class Interactable : MonoBehaviour
     /// </summary>
     void Start()
     {
-
         GameStateMachine.current.onStatePushed += onStateUp;
         currentState = GameStateMachine.current.GetState();
+    }
+
+    public Node getClosestNode()
+    {
+        return closestNode;
     }
 
     public void DoInteract()
@@ -26,7 +34,7 @@ public class Interactable : MonoBehaviour
         if (!isInteractable)
             return;
 
-        if (currentState == stateToPushTheState)
+        if (hasAction && currentState == stateToPushTheState)
         {
             Debug.Log("DOING SOMETHING");
             // Do something special
@@ -68,6 +76,13 @@ public class Interactable : MonoBehaviour
     /// </summary>
     void OnMouseUpAsButton()
     {
-        DoInteract();
+        CharacterControlScript.current.BeginInteraction(this);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draws a blue line from this transform to the target
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, closestNode.transform.position);
     }
 }
