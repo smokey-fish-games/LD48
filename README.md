@@ -1,7 +1,7 @@
 A point and click adventure game for the LD48 Compo.
 
-[PLAY HERE!](https://jademonkey7988.itch.io/deep-trouble-in-the-art-gallery)
-[Comment and Rate here!](https://ldjam.com/events/ludum-dare/48/deep-trouble-in-the-art-gallery)
+* [PLAY HERE!](https://jademonkey7988.itch.io/deep-trouble-in-the-art-gallery)
+* [Comment and Rate here!](https://ldjam.com/events/ludum-dare/48/deep-trouble-in-the-art-gallery)
 
 # Controls 
 Mouse - left click on interactable objects to move to and interact. Interactable objects are shown by  the animated mouse pointer.
