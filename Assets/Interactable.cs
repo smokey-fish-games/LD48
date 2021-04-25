@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     // Current State where interacting with this object will  cause the state to get pushed forwards.
     [SerializeField] private GameStateMachine.StateOptions stateToPushTheState;
     [SerializeField] private string defaultResponse = "REPLACE ME DOOFUS";
+    [SerializeField] private string interactResponse = "REPLACE ME DOOFUS";
 
     private Animator animatorionar;
 
@@ -45,17 +46,18 @@ public class Interactable : MonoBehaviour
 
         if (hasAction && currentState == stateToPushTheState)
         {
-            preInteractionFunctions.Invoke();
-            Debug.Log("DOING SOMETHING");
             // Do something special
-            // Push state forwards
+            preInteractionFunctions.Invoke();
+            if (interactResponse != "")
+                dialogcontroller.current.AddStringToWrite(interactResponse);
             StartAnimation();
             GameStateMachine.current.PushState();
         }
         else
         {
             // Default response
-            Debug.Log("DR: " + defaultResponse);
+            if (defaultResponse != "")
+                dialogcontroller.current.AddStringToWrite(defaultResponse);
         }
     }
 
@@ -69,7 +71,6 @@ public class Interactable : MonoBehaviour
     /// </summary>
     void OnMouseOver()
     {
-        // TODO show me the object shiny yeaaahhhhhh
         pointerController.current.setAnim(true);
     }
 
@@ -78,7 +79,6 @@ public class Interactable : MonoBehaviour
     /// </summary>
     void OnMouseExit()
     {
-        // TODO don't show me the shiny oh yeah
         pointerController.current.setAnim(false);
     }
 
@@ -104,14 +104,12 @@ public class Interactable : MonoBehaviour
 
     public void DestoryMeDaddy()
     {
-        Debug.LogWarning("GOODBYE " + this.name);
         transform.gameObject.SetActive(false);
         //GameObject.Destroy(this);
     }
 
     public void HelloThere()
     {
-        Debug.LogWarning("HELLO " + this.name);
         transform.gameObject.SetActive(true);
         //GameObject.Destroy(this);
     }
