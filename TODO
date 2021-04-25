@@ -1,33 +1,9 @@
 ## Art
-* Room
-* Vase Stand
-* Vase
-* Tapestry
-* Painting
-* broom
-* Fire extinguisher + Fire Alarm
-* Sprinklers
-* - Idle
-* - Spraying
-* - Broken
-* fire
-* Rug
-* Turtle Spike shell
-* Exit ?
-* Lamp
-* Rail
-
-* Player
-* - Walking animation
-* - Interact animation
-* - Carrying FE
-* - Carrying broom
-* optional, shocked expression?
 
 * Run in boy
 * - running
 * - Slipping
-* Stabbed
+* - Stabbed
 
 * Game logo
 * Start button?
@@ -35,7 +11,11 @@
 ## Finals
 * Exit
   - Post leaving scene?
+* Check animation/sound timings
+* Cancel interaction?
 
+
+# Upload
 * Write the upload
 * test in web browser
 * Submit

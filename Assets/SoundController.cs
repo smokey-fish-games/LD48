@@ -8,13 +8,13 @@ public class SoundController : MonoBehaviour
         PAINTINGFALL, // done
         LAMPFALL, // done
         FIRESTART, // done
-        FIREALARM,
+        FIREALARM, // done
         SPRINKLERS, // done
         TAPESTRYMOVE, // done
         THUD, // done
         SWEEP, // done
         FIREEXTINGUISH, // done
-        PICKUP
+        PICKUP // done
     }
 
     [SerializeField]

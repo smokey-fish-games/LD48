@@ -10,6 +10,9 @@ public class CharacterControlScript : MonoBehaviour
 
     public static CharacterControlScript current;
 
+    [SerializeField]
+    private Animator ani;
+
     private Interactable targetInteractable;
     List<Node> walkingRoute;
     bool isDoingSomething = true;
@@ -60,6 +63,7 @@ public class CharacterControlScript : MonoBehaviour
     IEnumerator StartCreeping()
     {
         SoundController.current.PlayWalkSound();
+        ani.SetBool("Walking", true);
         for (int i = 0; i < walkingRoute.Count; i++)
         {
             Node targetNode = walkingRoute[i];
@@ -90,6 +94,7 @@ public class CharacterControlScript : MonoBehaviour
             }
         }
         SoundController.current.StopWalkSound();
+        ani.SetBool("Walking", false);
 
         currentNode = walkingRoute[walkingRoute.Count - 1];
 
@@ -106,7 +111,9 @@ public class CharacterControlScript : MonoBehaviour
             }
 
             // call the interact now we're there
+            ani.SetBool("Interact", true);
             targetInteractable.DoInteract();
+            ani.SetBool("Interact", false);
 
         }
         isDoingSomething = false;
