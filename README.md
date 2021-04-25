@@ -1,6 +1,7 @@
 A point and click adventure game for the LD48 Compo.
 
-[PLAY HERE](https://jademonkey7988.itch.io/deep-trouble-in-the-art-gallery)
+[PLAY HERE!](https://jademonkey7988.itch.io/deep-trouble-in-the-art-gallery)
+[Comment and Rate here!](https://ldjam.com/events/ludum-dare/48/deep-trouble-in-the-art-gallery)
 
 # Controls 
 Mouse - left click on interactable objects to move to and interact. Interactable objects are shown by  the animated mouse pointer.
@@ -21,7 +22,6 @@ I hope you enjoyed the game and i look forward to reading your comments and cons
 * 'Art' created in [Aseprite](https://www.aseprite.org/).
 * Cat painting created by taking a picture of my cat with my phone and adjusting in [Aseprite](https://www.aseprite.org/).
 * I did stream some of the development on [twitch](https://www.twitch.tv/jademonkey).
-
 
 # Screenshots
 ![coverphoto](https://user-images.githubusercontent.com/5496935/116010467-04356980-a617-11eb-9912-ec99580a4b88.png)
