@@ -3,6 +3,7 @@ using UnityEngine;
 public class pointerController : MonoBehaviour
 {
     Animator animator;
+    SpriteRenderer spriteRenderer;
 
     public static pointerController current;
 
@@ -28,7 +29,15 @@ public class pointerController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        Cursor.visible = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        Cursor.visible = true;
+        spriteRenderer.enabled = false;
+    }
+
+    public void ReplacePointer()
+    {
+        Cursor.visible = !Cursor.visible;
+        spriteRenderer.enabled = !spriteRenderer.enabled;
     }
 
     /// <summary>

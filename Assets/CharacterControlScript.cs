@@ -12,7 +12,7 @@ public class CharacterControlScript : MonoBehaviour
 
     private Interactable targetInteractable;
     List<Node> walkingRoute;
-    bool isDoingSomething;
+    bool isDoingSomething = true;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -47,12 +47,19 @@ public class CharacterControlScript : MonoBehaviour
         isDoingSomething = true;
 
         // Walk to the route
-        walkingRoute = Node.findPath(currentNode, targetInteractable.getClosestNode());
+        DoWalk(targetInteractable.getClosestNode());
+    }
+
+    public void DoWalk(Node target)
+    {
+        // Walk to the route
+        walkingRoute = Node.findPath(currentNode, target);
         StartCoroutine("StartCreeping");
     }
 
     IEnumerator StartCreeping()
     {
+        SoundController.current.PlayWalkSound();
         for (int i = 0; i < walkingRoute.Count; i++)
         {
             Node targetNode = walkingRoute[i];
@@ -82,20 +89,26 @@ public class CharacterControlScript : MonoBehaviour
                 yield return null;
             }
         }
+        SoundController.current.StopWalkSound();
 
-        // make them face the object
-        if (transform.position.x > targetInteractable.transform.position.x)
-        {
-            faceLeft();
-        }
-        else
-        {
-            faceRight();
-        }
+        currentNode = walkingRoute[walkingRoute.Count - 1];
 
-        // call the interact now we're there
-        targetInteractable.DoInteract();
-        currentNode = targetInteractable.getClosestNode();
+        if (targetInteractable != null)
+        {
+            // make them face the object
+            if (transform.position.x > targetInteractable.transform.position.x)
+            {
+                faceLeft();
+            }
+            else
+            {
+                faceRight();
+            }
+
+            // call the interact now we're there
+            targetInteractable.DoInteract();
+
+        }
         isDoingSomething = false;
     }
 
